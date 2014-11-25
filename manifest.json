@@ -1,0 +1,16 @@
+{
+	"name":"Login FDU",
+	"version":"0.1",
+	"manifest_version":2,
+	"icons": {
+		"16": "img/icon16.png",
+        "48": "img/icon48.png",
+        "128": "img/icon128.png"
+	},
+	"permissions":[	
+		"http://10.108.255.249/*"
+	],
+	"background":{
+		"scripts":["login.js"]
+	}
+}

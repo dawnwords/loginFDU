@@ -82,3 +82,4 @@ var handler = function(request,sender,sendResponse){
 
 ba.onClicked.addListener(stop);
 chrome.extension.onMessage.addListener(handler);
+start(local.user, local.period);

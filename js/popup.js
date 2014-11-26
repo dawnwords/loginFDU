@@ -1,18 +1,18 @@
 window.onload = function(){
-	load_value("user");
-	load_value("period");
+	var local = window.localStorage;
+	var user_input = document.getElementById("user");
+	var period_input = document.getElementById("period");
+	var start_btn = document.getElementById("start");
 
-	var start_btn = document.getElementById("start")
+	user_input.value = local.user || '';
+	period_input.value = local.period || '';
+
 	start_btn.onclick = function(){
-		var msg = start();
-		if(msg) { 
-			alert(msg); 
-		} else {
-			window.close();
-		}
+		var request = {
+			user: user_input.value,
+			period: period_input.value
+		};
+		chrome.extension.sendMessage(request);
+		window.close();
 	};
-}
-
-function load_value (id) {
-	document.getElementById(id).value=window.localStorage[id] || '';
 }

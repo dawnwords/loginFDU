@@ -11,7 +11,7 @@
 		"http://10.108.255.249/*"
 	],
 	"background":{
-		"scripts":["login.js"]
+		"scripts":["js/login.js"]
 	},
 	"browser_action":{
 		"default_icon": "img/icon16_g.png", 

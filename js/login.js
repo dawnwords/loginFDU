@@ -2,8 +2,8 @@ var ba = chrome.browserAction;
 var local = window.localStorage;
 var si;
 
-var do_login = function(user,pass){
-	var data = "username=" + user + "&password={TEXT}" + pass + "&drop=0&type=1&n=100";
+var do_login = function(user){
+	var data = "username=" + user + "&drop=0&type=1&n=100";
 	return do_post("do_login", data);
 }
 
@@ -48,13 +48,11 @@ var error_info = function(key){
 
 var start = function(){
 	var user = document.getElementById("user").value || '';
-	var pass = document.getElementById("pass").value || '';
 	var period = document.getElementById("period").value;
-	var uid = do_login(user, pass);
+	var uid = do_login(user);
 	var digits = /^[\d]+$/;
 	if(digits.test(uid)){
 		local.user = user;
-		local.pass = pass;
 		local.period = period;
 
 		period = isNaN(period) || period < 10 ? 10 : period;
@@ -69,8 +67,3 @@ var start = function(){
 }
 
 ba.onClicked.addListener(stop);
-
-// var uid = do_login(14212010005, 260955);
-// setInterval(function(){
-// 	keep_live(uid);
-// }, 10 * 60 * 1000);

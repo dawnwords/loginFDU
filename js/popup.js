@@ -1,6 +1,5 @@
 window.onload = function(){
 	load_value("user");
-	load_value("pass");
 	load_value("period");
 
 	var start_btn = document.getElementById("start")

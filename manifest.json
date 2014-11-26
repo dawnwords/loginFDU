@@ -12,5 +12,10 @@
 	],
 	"background":{
 		"scripts":["login.js"]
+	},
+	"browser_action":{
+		"default_icon": "img/icon16_g.png", 
+		"default_title": "FDU Login",
+		"default_popup": "popup.html"
 	}
 }

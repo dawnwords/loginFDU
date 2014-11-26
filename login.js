@@ -1,5 +1,5 @@
-var do_login = function(user,pass){
-	var data = "username=" + user + "&password={TEXT}" + pass + "&drop=0&type=1&n=100";
+var do_login = function(user){
+	var data = "username=" + user + "&drop=0&type=1&n=100";
 	return do_post("do_login", data);
 }
 
@@ -15,7 +15,7 @@ var do_post = function(fun_name,data){
 	return post.responseText;
 }
 
-var uid = do_login(14212010005, 260955);
+var uid = do_login(14212010005);
 setInterval(function(){
 	keep_live(uid);
 }, 10 * 60 * 1000);

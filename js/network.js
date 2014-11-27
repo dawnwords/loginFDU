@@ -19,7 +19,7 @@ function Network(){
 	this.keep_live = function(period){
 		si = setInterval(function(){
 			var msg = do_post("keeplive", "uid=" + uid);
-			if(msg.contains("error")){
+			if(msg.indexOf("error") > -1){
 				do_login(user);
 			}
 		}, period);

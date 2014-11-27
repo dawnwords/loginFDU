@@ -1,5 +1,5 @@
 function Network(){
-	var uid;
+	var uid,si,user;
 
 	var do_post = function(fun_name,data){
 		var post = new XMLHttpRequest();
@@ -9,17 +9,25 @@ function Network(){
 		return post.responseText;
 	}
 
-	this.do_login = function(user){
+	this.do_login = function(username){
+		user = username;
 		var data = "username=" + user + "&password={TEXT}&drop=0&type=1&n=100";
 		uid = do_post("do_login", data);
 		return uid;
 	}
 
-	this.keep_live = function(){
-		do_post("keeplive", "uid=" + uid);
+	this.keep_live = function(period){
+		si = setInterval(function(){
+			var msg = do_post("keeplive", "uid=" + uid);
+			if(msg.contains("error")){
+				do_login(user);
+			}
+		}, period);
 	}
 
 	this.do_logout = function(){
+		clearInterval(si);
 		do_post("do_logout", "uid=" + uid);
+		uid = '';
 	}
 }

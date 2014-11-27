@@ -1,6 +1,5 @@
 var ba = chrome.browserAction;
 var local = window.localStorage;
-var si, uid;
 var network = new Network();
 var error = new Array();
 error['user_tab_error'] = '认证程序未启动';
@@ -30,29 +29,32 @@ var start_icon = function(){
 	ba.setPopup({popup:""});
 }
 
+var check_and_set_period = function(period){
+	if(isNaN(period) || period < 10){
+		local.removeItem("period");
+		period = 10;
+	} else {
+		local.period = period;
+	}
+	return period;
+}
+
 var stop = function(){
-	clearInterval(si);
 	network.do_logout();
 	stop_icon();
 }
 
 var start = function(user, period){
-	uid = network.do_login(user);
+	var uid = network.do_login(user);
 	var digits = /^[\d]+$/;
 	if(digits.test(uid)){
 		local.user = user;
-		if(isNaN(period) || period < 10){
-			local.removeItem("period");
-			period = 10;
-		} else {
-			local.period = period;
-		}
-
-		si = setInterval(network.keep_live, period * 1000);
+		period = check_and_set_period(period);		
 		start_icon();
+		network.keep_live(period * 1000);
 	} else {
+		local.removeItem("user");
 		alert(error[uid]);
-		uid = '';
 	}
 }
 

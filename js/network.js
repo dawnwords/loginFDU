@@ -21,7 +21,6 @@ function Network(){
 		si = setInterval(function(){
 			var msg = do_post("keeplive", "uid=" + uid);
 			if(msg.indexOf("error") > -1){
-				alert("keep_live response error!");
 				self.do_login(user);
 			}
 		}, period);
